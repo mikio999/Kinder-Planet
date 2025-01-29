@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAEjFme2sbqrIJlXciAwU0FVYR_eGRv8nQ",
-  authDomain: "kinderplanet-e2b15.firebaseapp.com",
-  projectId: "kinderplanet-e2b15",
-  storageBucket: "kinderplanet-e2b15.firebasestorage.app",
-  messagingSenderId: "768351075768",
-  appId: "1:768351075768:web:b217b497886a79bb2f234d",
-  measurementId: "G-9QSPF08FH8",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
