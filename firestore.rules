@@ -1,0 +1,8 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /cau_jobs/{document=**} {
+      allow read, write: if true;  // 모든 권한 허용 (개발용)
+    }
+  }
+}

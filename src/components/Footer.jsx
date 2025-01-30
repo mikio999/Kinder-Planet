@@ -16,9 +16,13 @@ const Footer = () => {
       }}
     >
       <Container>
-        <Typography variant="body1" gutterBottom>
+        <Typography
+          variant="body1"
+          sx={{ fontSize: "0.75rem", textAlign: "left" }}
+          gutterBottom
+        >
           본 사이트는 중앙대학교 유아교육과 (예비) 졸업생이 만든 사이트입니다.
-          <br /> 본 공고는 중앙대학교 유아교육과 취업게시판에서
+          <br /> 본 공고는 중앙대학교 유아교육과 취업게시판, 고가네에서
           스크래이핑했습니다.
           <br /> 모두 취뽀하세요 동문님들 🙇‍♀️
         </Typography>
