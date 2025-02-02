@@ -12,11 +12,15 @@ def format_date(date_str):
     current_year = datetime.now().year
     month, day = map(int, date_str.split('-'))
 
-    # 12월 데이터가 1월에 수집된 경우, 년도를 하나 줄임
     if month == 12 and datetime.now().month == 1:
         current_year -= 1
 
     return f"{current_year}-{month:02}-{day:02}"
+
+def is_existing_job(link):
+    """Firestore에서 동일한 링크가 존재하는지 확인"""
+    docs = db.collection("cau_jobs").where("link", "==", link).stream()
+    return any(docs)  # 하나라도 존재하면 True
 
 url = "https://cauece.cau.ac.kr/bbs/board.php?bo_table=s0405"
 response = requests.get(url)
@@ -39,10 +43,11 @@ for row in soup.find_all('tr'):
         if not link.startswith("http"):
             link = f"https://cauece.cau.ac.kr{link}"
 
-        job_postings.append({'title': title, 'date': date, 'link': link})
+        job_posting = {'title': title, 'date': date, 'link': link}
 
-for job in job_postings:
-    db.collection("cau_jobs").add(job)
-    print(f"✅ Firestore에 저장: {job['title']} ({job['link']}")
+        # 🔥 중복 검사 후 Firestore에 저장
+        if not is_existing_job(link):
+            db.collection("cau_jobs").add(job_posting)
+            print(f"✅ Firestore에 저장: {title} ({link})")
 
 print("🔥 Firestore 업데이트 완료!")

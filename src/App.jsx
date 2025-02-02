@@ -56,16 +56,25 @@ function App() {
         <Container
           sx={{
             display: "flex",
-            padding: "2rem",
+            paddingTop: "2rem",
+            paddingBottom: "0.7rem",
             justifyContent: "center",
           }}
         >
           {" "}
           <Typography variant="h4" sx={{ fontFamily: '"Jua", sans-serif' }}>
-            👶 유치원 공고 🚌
+            🚌 유치원 공고
           </Typography>
           <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
         </Container>
+        <Typography
+          variant="body1"
+          sx={{ paddingBottom: "1rem", color: "text.secondary" }}
+        >
+          전국 유치원 취업 정보를 한눈에! <br />
+          실시간으로 업데이트 되는 유치원 공고를 확인하고, <br />
+          원하는 채용 정보를 빠르게 찾아보세요 👀 <br />
+        </Typography>
         <JobList />
       </Container>
       <Footer /> {/* Footer 추가 */}
