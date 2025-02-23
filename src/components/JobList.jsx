@@ -18,20 +18,30 @@ const JobList = () => {
 
   useEffect(() => {
     const fetchJobs = async () => {
+      // ✅ CAU Jobs 가져오기
       const cauQuerySnapshot = await getDocs(collection(db, "cau_jobs"));
       const cauJobs = cauQuerySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
 
+      // ✅ Gogane Jobs 가져오기
       const goganeQuerySnapshot = await getDocs(collection(db, "gogane_jobs"));
       const goganeJobs = goganeQuerySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
 
-      const combinedJobs = [...cauJobs, ...goganeJobs].sort((a, b) =>
-        b.date.localeCompare(a.date)
+      // ✅ Seoul Jobs 가져오기
+      const seoulQuerySnapshot = await getDocs(collection(db, "seoul_jobs"));
+      const seoulJobs = seoulQuerySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      // ✅ 모든 공고를 날짜순 정렬 후 상태 업데이트
+      const combinedJobs = [...cauJobs, ...goganeJobs, ...seoulJobs].sort(
+        (a, b) => b.date.localeCompare(a.date)
       );
 
       setJobs(combinedJobs);
